@@ -24,7 +24,7 @@ class serverIO {
 class connectionsAndIO {
 
   private static String LOCALHOST = "127.0.0.1";
-  private static int PORT = 8080;
+  private static int PORT = 8090;
 
   private static DataInputStream input = null;
   private static DataOutputStream output = null;
@@ -67,14 +67,34 @@ class connectionsAndIO {
   }
 }
 
-class fibonacciWorkFlow {
+class NumbersWorkFlow {
 
-  public static int theFibonacciNumber (int number) {
+  private static boolean IsPrime (int number) {
 
-    if ((number == 1) || (number == 2))
-      return 1;
-    else
-      return theFibonacciNumber (number - 1) + theFibonacciNumber (number - 2);
+    if (number == 0) return true;
+
+    for (int iterator = 2; iterator <= number / 2; iterator++)
+      if (number % iterator == 0) return false;
+
+    return true;
+  }
+
+  private static boolean IsDivisible (int number, int parameter) {
+
+    if (number % parameter == 0) return true;
+
+    return false;
+  }
+
+  public static int GetNumberDivisorsSum (int number) {
+
+    int sum = 0;
+
+    for (int iterator = 2; iterator <= number; iterator++)
+      if (IsDivisible(number, iterator) && IsPrime(iterator))
+        sum += iterator;
+
+    return sum;
   }
 }
 
@@ -90,6 +110,6 @@ public class clientAndDataSource {
     DataStream = connectionsAndIO.implementClientServerCommunication ();
 
     convertedData = Integer.valueOf(DataStream);
-    System.out.println(fibonacciWorkFlow.theFibonacciNumber (convertedData));
+    System.out.println(NumbersWorkFlow.GetNumberDivisorsSum (convertedData));
   }
 }

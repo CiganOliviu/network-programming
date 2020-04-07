@@ -23,7 +23,7 @@ class IOWithTheClient {
 
 class connectionsAndIO {
 
-  private static int PORT = 8080;
+  private static int PORT = 8090;
 
   private static DataInputStream input = null;
   private static DataOutputStream output = null;
